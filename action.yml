@@ -1,38 +1,38 @@
-name: 'powershell-gallery-publish'
-author: 'Eric Mutua'
+name: powershell-gallery-publish
+author: Eric Mutua
 branding:
-    icon: 'terminal'  
-    color: 'blue'
-description: 'Publish powershell script/module'
+    icon: terminal
+    color: blue
+description: Publish powershell script/module
 inputs:
   nugetapi-key:  
-    description: 'Secret api key'
+    description: Secret api key
     required: false
-    default: '***'
+    default: ***
   payload-name:
-    description: 'Name of payload'
+    description: Name of payload
     required: true
-    default: 'payload'
+    default: payload
   payload-type: 
-    description: 'Type of payload'
+    description: Type of payload
     required: true
-    default: 'module'
+    default: module
   payload-required-version:
-    description: 'Version of payload'
+    description: Version of payload
     required: false 
   repository:
-    description: 'Respository to pubish to' 
+    description: Respository to pubish to 
     required: true
-    default: 'PSGallery' 
+    default: PSGallery 
 outputs:
   status: 
-    description: 'Publish Status'
+    description: Publish Status
     value: ${{ steps.check-status.outputs.state }}
 runs:
   using: "composite"
   steps: 
     - id: publish-payload
-    - run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
+      run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
       shell: pwsh  
     - id: check-status
       run: echo "::set-output name=state::$(echo ${{ steps.publish-payload.outputs.service-state }})"
