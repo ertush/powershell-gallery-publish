@@ -3,7 +3,7 @@ description: 'Publish powershell script/module'
 inputs:
   nugetapi-key:  
     description: 'Secret api key'
-    required: true
+    required: false
     default: '***'
   payload-name:
     description: 'Name of payload'
