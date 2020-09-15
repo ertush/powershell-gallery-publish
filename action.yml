@@ -1,4 +1,8 @@
 name: 'powershell-gallery-publish'
+author: 'Eric Mutua'
+branding:
+    icon: 'terminal'  
+    color: 'blue'
 description: 'Publish powershell script/module'
 inputs:
   nugetapi-key:  
@@ -27,18 +31,10 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    if: ${{ inputs.payload-type }} == 'module'
-    - id: publish-module
-    - run: Publish-Module -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
-      shell: pwsh
-    if: ${{ inputs.payload.type }} == 'script'
-    - id: publish-script
-    - run: Publish-Script -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -Force ; echo "::set-output name=service-state::$(echo $?)"
-      shell: pwsh   
+    - id: publish-payload
+    - run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
+      shell: pwsh  
     - id: check-status
-      if: ${{ steps.publish-module }}
-      run: echo "::set-output name=state::$(echo ${{ steps.publish-module.outputs.service-state }})"
+      run: echo "::set-output name=state::$(echo ${{ steps.publish-payload.outputs.service-state }})"
       shell: bash
-      if: ${{ steps.publish-script }}
-      run: echo "::set-output name=state::$(echo ${{ steps.publish-script.outputs.service-state }})"
-      shell: bash
+      
