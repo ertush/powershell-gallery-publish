@@ -1,14 +1,17 @@
 name: powershell-gallery-publish
+description: Publish powershell script/module
+
 author: Eric Mutua
+
 branding:
     icon: terminal
     color: blue
-description: Publish powershell script/module
+
 inputs:
   nugetapi-key:  
     description: Secret api key
     required: false
-    default: ***
+    default: '***'
   payload-name:
     description: Name of payload
     required: true
@@ -32,9 +35,9 @@ runs:
   using: "composite"
   steps: 
     - id: publish-payload
-      run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
-      shell: pwsh  
+    run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
+    shell: pwsh  
     - id: check-status
-      run: echo "::set-output name=state::$(echo ${{ steps.publish-payload.outputs.service-state }})"
-      shell: bash
+    run: echo "::set-output name=state::$(echo ${{ steps.publish-payload.outputs.service-state }})"
+    shell: bash
       
