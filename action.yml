@@ -34,10 +34,9 @@ outputs:
 runs:
   using: "composite"
   steps: 
-    - id: publish-payload
     run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
     shell: pwsh  
     - id: check-status
-    run: echo "::set-output name=state::$(echo ${{ steps.publish-payload.outputs.service-state }})"
-    shell: bash
+    run: echo "::set-output name=state::$(echo $?)"
+    shell: pwsh
       
