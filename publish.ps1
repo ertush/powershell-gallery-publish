@@ -11,8 +11,8 @@ function pullSource(){
 }
 
 function publishSource(){
-    # # Update packages
-    # updatePackages
+    # Update packages
+    updatePackages
     
     # # Pull Sources
     # pullSource
@@ -25,6 +25,8 @@ function publishSource(){
     # {
     #     Publish-Script -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -Force
     # } 
+
+    git version
 
     echo "API_KEY"$env:INPUT_NUGETAPIKEY;
     echo "PAYLOAD_NAME"$env:INPUT_PAYLOADNAME;
