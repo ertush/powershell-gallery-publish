@@ -1,5 +1,7 @@
 FROM microsoft/powershell:latest
 
-COPY publish.ps1 /
+COPY publish.ps1 /publish
 
-ENTRYPOINT [ "/publish.ps1" ]
+RUN chmod +x ./publish.ps1
+
+ENTRYPOINT [ "pwsh", "-c", "/publish.ps1" ]
