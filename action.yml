@@ -26,17 +26,23 @@ inputs:
   repository:
     description: Respository to pubish to 
     required: true
-    default: PSGallery 
+    default: PSGallery
+  source:
+    description: Sources for source code
+    required: true 
 outputs:
   status: 
     description: Publish Status
     value: ${{ steps.check-status.outputs.state }}
 runs:
-  using: "composite"
-  steps: 
-    run: publish-${{ inputs.payload-type }} -Path ${{ GITHUB_WORKSPACE }} -Name ${{ inputs.payload-name }} -NuGetApiKey ${{ inputs.nugetapi-key }} -RequiredVersion ${{ inputs.payload-required-version }} -Respository ${{ inputs.repository }} -Force ; echo "::set-output name=service-state::$(echo $?)"
-    shell: pwsh  
-    - id: check-status
-    run: echo "::set-output name=state::$(echo $?)"
-    shell: pwsh
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.payload-name }}
+    - ${{ inputs.payload-type }}
+    - ${{ inputs.nugetapi-key }}
+    - ${{ inputs.repository }}
+    - ${{ inputs.payload-required-version }}
+    - ${{ inputs.source }}
+
       
