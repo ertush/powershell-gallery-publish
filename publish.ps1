@@ -21,7 +21,7 @@ function getSourceVersion(){
     
     cd $source_path;
 
-    if($(Get-Variable $env:INPUT_PAYLOADREQUIREDVERSION).IsValidValue){
+    if(-not $env:INPUT_PAYLOADREQUIREDVERSION -eq $null){
 
         $env:INPUT_PAYLOADREQUIREDVERSION = $env:INPUT_PAYLOADREQUIREDVERSION
     }

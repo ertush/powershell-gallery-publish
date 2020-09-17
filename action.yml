@@ -23,6 +23,7 @@ inputs:
   payloadrequiredversion:
     description: Version of payload
     required: false 
+    default: null
   repository:
     description: Respository to pubish to 
     required: true
