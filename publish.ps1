@@ -49,7 +49,7 @@ function publishSource(){
 
     # Check payload type script/module
     if($env:INPUT_PAYLOADTYPE -eq 'module'){
-        Publish-Module -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -RequiredVersion $env:INPUT_PAYLOADREQUIREDVERSION -Force
+        Publish-Module -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -Force
     }
     else
     {
