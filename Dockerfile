@@ -1,7 +1,8 @@
 FROM microsoft/powershell:latest
 
-COPY publish.ps1 /publish
+WORKDIR /scripts
+COPY publish.ps1 /scripts
 
-RUN chmod +x ./publish.ps1
+RUN chmod +x /scripts/publish.ps1
 
-ENTRYPOINT [ "pwsh", "/publish.ps1" ]
+ENTRYPOINT [ "pwsh", "/scripts/publish.ps1" ]
