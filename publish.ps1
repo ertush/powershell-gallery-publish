@@ -18,7 +18,7 @@ function publishSource(){
     pullSource
 
     # Check payload type script/module
-    if($env:INPUT_PAYLOAD-TYPE -eq 'module'){
+    if($env:INPUT_PAYLOAD`-TYPE -eq 'module'){
         Publish-Module -Name $env:INPUT_PAYLOAD-NAME -NuGetApi $env:INPUT_NUGETAPI-KEY -Repository $env:INPUT_REPOSITORY -RequiredVersion -Force
     }
     else
