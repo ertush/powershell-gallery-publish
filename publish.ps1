@@ -28,11 +28,11 @@ function publishSource(){
 
     git version
 
-    echo "API_KEY"$env:INPUT_NUGETAPIKEY;
-    echo "PAYLOAD_NAME"$env:INPUT_PAYLOADNAME;
-    echo "PAYLOAD_TYPE"$env:INPUT_PAYLOADTYPE;
-    echo "REPOSITORY"$env:INPUT_REPOSITORY;
-    echo "INPUT_SOURCE"$env:INPUT_SOURCE;
+    echo "API_KEY :"$env:INPUT_NUGETAPIKEY;
+    echo "PAYLOAD_NAME :"$env:INPUT_PAYLOADNAME;
+    echo "PAYLOAD_TYPE :"$env:INPUT_PAYLOADTYPE;
+    echo "REPOSITORY :"$env:INPUT_REPOSITORY;
+    echo "INPUT_SOURCE :"$env:INPUT_SOURCE;
     
 }
 
