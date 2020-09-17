@@ -8,19 +8,19 @@ branding:
     color: blue
 
 inputs:
-  nugetapi-key:  
+  nugetapikey:  
     description: Secret api key
     required: false
     default: '***'
-  payload-name:
+  payloadname:
     description: Name of payload
     required: true
     default: payload
-  payload-type: 
+  payloadtype: 
     description: Type of payload
     required: true
     default: module
-  payload-required-version:
+  payloadrequiredversion:
     description: Version of payload
     required: false 
   repository:
@@ -38,11 +38,11 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
-    - ${{ inputs.payload-name }}
-    - ${{ inputs.payload-type }}
-    - ${{ inputs.nugetapi-key }}
+    - ${{ inputs.payloadname }}
+    - ${{ inputs.payloadtype }}
+    - ${{ inputs.nugetapikey }}
     - ${{ inputs.repository }}
-    - ${{ inputs.payload-required-version }}
+    - ${{ inputs.payloadrequiredversion }}
     - ${{ inputs.source }}
 
       

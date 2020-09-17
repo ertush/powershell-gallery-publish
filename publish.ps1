@@ -18,12 +18,12 @@ function publishSource(){
     pullSource
 
     # Check payload type script/module
-    if($env:INPUT_PAYLOAD`-TYPE -eq 'module'){
-        Publish-Module -Name $env:INPUT_PAYLOAD-NAME -NuGetApi $env:INPUT_NUGETAPI-KEY -Repository $env:INPUT_REPOSITORY -RequiredVersion -Force
+    if($env:INPUT_PAYLOADTYPE -eq 'module'){
+        Publish-Module -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -RequiredVersion -Force
     }
     else
     {
-        Publish-Script -Name $env:INPUT_PAYLOAD-NAME -NuGetApi $env:INPUT_NUGETAPI-KEY -Repository $env:INPUT_REPOSITORY -Force
+        Publish-Script -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -Force
     } 
 }
 
