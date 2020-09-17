@@ -1,7 +1,7 @@
 
 function updatePackages(){
     apt update ;
-    apt install git ;
+    apt install git -y;
 }
 
 function pullSource(){
@@ -11,20 +11,27 @@ function pullSource(){
 }
 
 function publishSource(){
-    # Update packages
-    updatePackages
+    # # Update packages
+    # updatePackages
     
-    # Pull Sources
-    pullSource
+    # # Pull Sources
+    # pullSource
 
-    # Check payload type script/module
-    if($env:INPUT_PAYLOADTYPE -eq 'module'){
-        Publish-Module -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -RequiredVersion -Force
-    }
-    else
-    {
-        Publish-Script -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -Force
-    } 
+    # # Check payload type script/module
+    # if($env:INPUT_PAYLOADTYPE -eq 'module'){
+    #     Publish-Module -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -RequiredVersion -Force
+    # }
+    # else
+    # {
+    #     Publish-Script -Name $env:INPUT_PAYLOADNAME -NuGetApi $env:INPUT_NUGETAPIKEY -Repository $env:INPUT_REPOSITORY -Force
+    # } 
+
+    echo "API_KEY"$env:INPUT_NUGETAPIKEY;
+    echo "PAYLOAD_NAME"$env:INPUT_PAYLOADNAME;
+    echo "PAYLOAD_TYPE"$env:INPUT_PAYLOADTYPE;
+    echo "REPOSITORY"$env:INPUT_REPOSITORY;
+    echo "INPUT_SOURCE"$env:INPUT_SOURCE;
+    
 }
 
 publishSource
